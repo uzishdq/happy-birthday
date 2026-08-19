@@ -1,36 +1,116 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎂 Sweet Happy Birthday Website
 
-## Getting Started
+Website ucapan **Happy Birthday** interaktif, romantis, dan lucu (*cute & playful*) yang dibangun dengan **Next.js (App Router)**, **Tailwind CSS**, **Framer Motion**, dan **Web Audio API**.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## ✨ Fitur Utama
+
+- 🔒 **Lock Screen / Gerbang Waktu Countdown**
+  - Website otomatis terkunci dengan countdown karakter chibi tidur dan kotak kado tersegel sampai tanggal & jam yang ditentukan (misal: 21 Agustus, 00:00 WIB).
+  - Begitu waktu tercapai, halaman otomatis terbuka (*unlock*) tanpa perlu refresh.
+
+- 💌 **Opening Screen / Interactive Envelope**
+  - Amplop interaktif dengan efek suara *chime* manis dan semburan *confetti*.
+  - Menampilkan surat yang muncul dari dalam amplop beserta ucapan pembuka dan badge harapan.
+
+- 📜 **Love Message Section**
+  - Surat ucapan personal dalam bentuk kartu pos / amplop flip yang manis.
+
+- 🎁 **Elemen 3D Interaktif (3D Gift Box)**
+  - Kotak kado 3D murni CSS yang bisa diputar / di-*drag* dengan pointer/sentuhan dan diklik untuk membuka kejutan spesial.
+
+- 🎈 **Pop the Balloons (Layar Penuh & Ultra Meriah)**
+  - Efek balon melayang yang menutupi seluruh layar dengan animasi *sway* alami.
+  - Setiap balon yang di-*tap* mengeluarkan suara letupan (*Web Audio API*), getaran (*haptic*), dan semburan partikel bintang confetti tepat di titik sentuhan.
+  - *Grand Finale Celebration* ketika semua balon berhasil dipecahkan + tombol untuk meniup balon lagi.
+
+- 🕯️ **Tiup Lilin & Confetti Celebration**
+  - Kue ulang tahun dengan lilin menyala yang bisa ditiup (menghasilkan asap lembut dan semburan meriam confetti multi-arah).
+
+- 🎵 **Floating Music Player**
+  - Pemutar musik estetik dengan tombol play/pause, pengatur volume, mute, dan *floating musical notes*.
+  - Mendukung konfigurasi posisi mulai lagu (*start time* dalam detik) dan loop otomatis kembali ke detik yang ditentukan.
+
+- 💝 **Footer & Tanda Tangan**
+  - Tanda tangan pengirim, tanggal spesial, dan jejak hati melayang (*heart trail*).
+
+---
+
+## 🛠️ Tech Stack
+
+- **Framework**: Next.js (App Router, TypeScript)
+- **Styling**: Tailwind CSS (Claymorphism & Soft Pastel Theme)
+- **Animasi**: Framer Motion
+- **Efek Partikel**: canvas-confetti
+- **Audio Effects**: Web Audio API (Synthesized pop & chime)
+- **Tipografi**: Dancing Script (Heading) & Nunito (Body)
+
+---
+
+## ⚙️ Konfigurasi Environment Variables
+
+Buat file `.env.local` di direktori root (atau salin dari `.env.example`):
+
+```env
+# Nama penerima & pengirim ucapan
+NEXT_PUBLIC_RECIPIENT_NAME="Sayang"
+NEXT_PUBLIC_SENDER_NAME="Kamu"
+
+# Path file audio di dalam folder public/music/ (kosongkan jika tanpa musik)
+NEXT_PUBLIC_MUSIC_FILE="/music/Perunggu-Ini-Abadi.mp3"
+
+# Mulai musik dari detik ke-berapa (contoh: 63 = menit 1:03, 0 = dari awal)
+NEXT_PUBLIC_MUSIC_START_TIME=63
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🚀 Memulai (Getting Started)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. **Install Dependencies:**
+   ```bash
+   npm install
+   ```
 
-## Learn More
+2. **Jalankan Development Server:**
+   ```bash
+   npm run dev
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+3. Buka [http://localhost:3000](http://localhost:3000) pada browser Anda.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+4. **Build untuk Production:**
+   ```bash
+   npm run build
+   npm run start
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 📂 Struktur Project
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+├── app/
+│   ├── components/
+│   │   ├── CelebrationSection.tsx   # Tiup lilin & confetti
+│   │   ├── FooterSection.tsx        # Signature & heart trail
+│   │   ├── HeroSection.tsx          # Amplop pembuka & greeting
+│   │   ├── Interactive3DSection.tsx # Kado 3D & Pop Balloons
+│   │   ├── LockScreen.tsx           # Countdown lock screen
+│   │   ├── MessageSection.tsx       # Surat pesan cinta
+│   │   ├── MusicPlayer.tsx          # Pemutar musik floating
+│   │   └── types.ts
+│   ├── config/
+│   │   └── site.ts                  # Konfigurasi env public
+│   ├── hooks/
+│   │   └── useLockScreen.ts         # Hook hitung mundur waktu unlock
+│   ├── globals.css                  # Custom claymorphism & theme
+│   ├── layout.tsx
+│   └── page.tsx
+├── public/
+│   └── music/                       # Folder file audio/mp3
+├── .env.example
+├── .env.local
+└── README.md
+```

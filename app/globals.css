@@ -1,26 +1,259 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* ── Design System: Sweet Birthday (Custom Theme) ── */
+/* Palette: Pastel Warm — Pink Blush, Peach, Cream, Lavender         */
+/* Typography: Dancing Script (heading) + Nunito (body)               */
+/* Style: Claymorphism — soft, chunky, bubbly, playful                */
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Colors */
+  --color-pink-blush:    #F9A8D4;
+  --color-pink-light:    #FBCFE8;
+  --color-pink-pale:     #FDF2F8;
+  --color-peach:         #FDBA74;
+  --color-peach-light:   #FED7AA;
+  --color-cream:         #FEF9F0;
+  --color-lavender:      #DDD6FE;
+  --color-lavender-light:#EDE9FE;
+  --color-rose:          #FB7185;
+  --color-rose-dark:     #E11D48;
+  --color-text-primary:  #4A1D2E;
+  --color-text-muted:    #9D4E6B;
+  --color-bg:            #FEF9F0;
+
+  /* Fonts — exposes font-script and font-body as Tailwind utilities */
+  --font-script: var(--font-dancing), cursive;
+  --font-body:   var(--font-nunito), 'Nunito', sans-serif;
+
+  /* Animation durations */
+  --duration-bounce: 600ms;
+  --duration-fade:   300ms;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ── Base ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+  font-family: var(--font-body), 'Nunito', sans-serif;
+  overflow-x: hidden;
+  min-height: 100dvh;
+}
+
+/* ── Keyframes ── */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33%       { transform: translateY(-12px) rotate(2deg); }
+  66%       { transform: translateY(-6px) rotate(-2deg); }
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25%       { transform: rotate(-8deg); }
+  75%       { transform: rotate(8deg); }
+}
+
+@keyframes bounce-in {
+  0%   { transform: scale(0) rotate(-10deg); opacity: 0; }
+  60%  { transform: scale(1.1) rotate(3deg); opacity: 1; }
+  80%  { transform: scale(0.95) rotate(-2deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+@keyframes heart-beat {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.15); }
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 0; transform: scale(0) rotate(0deg); }
+  50%       { opacity: 1; transform: scale(1) rotate(180deg); }
+}
+
+@keyframes ribbon-wave {
+  0%, 100% { transform: skewX(0deg); }
+  50%       { transform: skewX(-3deg); }
+}
+
+@keyframes confetti-fall {
+  0%   { transform: translateY(-10px) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+}
+
+@keyframes letter-open {
+  0%   { transform: rotateX(0deg); }
+  100% { transform: rotateX(-180deg); }
+}
+
+@keyframes slide-up {
+  0%   { transform: translateY(40px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes pulsate {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%       { transform: scale(1.05); opacity: 0.9; }
+}
+
+/* ── Utility animation classes ── */
+.animate-float        { animation: float 4s ease-in-out infinite; }
+.animate-wiggle       { animation: wiggle 0.6s ease-in-out; }
+.animate-bounce-in    { animation: bounce-in 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+.animate-heart-beat   { animation: heart-beat 1.2s ease-in-out infinite; }
+.animate-sparkle      { animation: sparkle 1.5s ease-in-out infinite; }
+.animate-ribbon-wave  { animation: ribbon-wave 2s ease-in-out infinite; }
+.animate-spin-slow    { animation: spin-slow 8s linear infinite; }
+.animate-pulsate      { animation: pulsate 2s ease-in-out infinite; }
+.animate-slide-up     { animation: slide-up 0.6s ease-out forwards; }
+
+/* ── Clay morphism card ── */
+.clay-card {
+  border-radius: 20px;
+  border: 3px solid rgba(249, 168, 212, 0.4);
+  box-shadow:
+    0 8px 24px rgba(251, 113, 133, 0.15),
+    0 2px 8px rgba(249, 168, 212, 0.2),
+    inset 0 1px 0 rgba(255,255,255,0.6);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  transition: transform 200ms ease-out, box-shadow 200ms ease-out;
+}
+
+.clay-card:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 16px 40px rgba(251, 113, 133, 0.22),
+    0 4px 12px rgba(249, 168, 212, 0.25),
+    inset 0 1px 0 rgba(255,255,255,0.7);
+}
+
+/* ── Clay button ── */
+.clay-btn {
+  border-radius: 50px;
+  border: 3px solid rgba(251, 113, 133, 0.5);
+  box-shadow:
+    0 6px 20px rgba(251, 113, 133, 0.3),
+    0 2px 6px rgba(249, 168, 212, 0.2),
+    inset 0 1px 0 rgba(255,255,255,0.5);
+  transition: transform 150ms ease-out, box-shadow 150ms ease-out;
+  cursor: pointer;
+}
+
+.clay-btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow:
+    0 10px 28px rgba(251, 113, 133, 0.4),
+    0 4px 10px rgba(249, 168, 212, 0.3),
+    inset 0 1px 0 rgba(255,255,255,0.6);
+}
+
+.clay-btn:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+/* ── Gradient text ── */
+.text-gradient {
+  background: linear-gradient(135deg, #FB7185 0%, #F472B6 40%, #C084FC 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-shimmer {
+  background: linear-gradient(90deg, #FB7185 0%, #F9A8D4 30%, #C084FC 60%, #F9A8D4 80%, #FB7185 100%);
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 3s linear infinite;
+}
+
+/* ── Floating hearts background ── */
+.hearts-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ── Scroll-driven section visibility ── */
+.section-fade {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+.section-fade.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Envelope ── */
+.envelope-wrapper {
+  perspective: 800px;
+}
+
+.envelope-lid {
+  transform-origin: top center;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.envelope-lid.open {
+  transform: rotateX(-180deg);
+}
+
+/* ── 3D Gift box ── */
+.gift-box {
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease-out;
+}
+
+.gift-box:hover {
+  transform: rotateY(15deg) rotateX(-10deg);
+}
+
+/* ── Scrollbar styling ── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-pink-pale);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-pink-blush);
+  border-radius: 3px;
+}
+
+/* ── Focus visible ── */
+:focus-visible {
+  outline: 3px solid var(--color-pink-blush);
+  outline-offset: 3px;
+  border-radius: 4px;
 }
