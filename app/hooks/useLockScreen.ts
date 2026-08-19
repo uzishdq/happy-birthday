@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 import type { TimeLeft } from "../components/types";
 
-const UNLOCK_DATE_UTC = new Date("2026-08-15T17:00:00Z"); // 21 Aug 00:00 WIB
+// 20 Agustus jam 12 malam teng (21 Agustus 00:00:00 WIB = 20 Agustus 17:00:00 UTC)
+const UNLOCK_DATE_UTC = new Date("2026-08-21T00:00:00+07:00");
 
 function getTimeLeft(): TimeLeft {
   const now = new Date();
